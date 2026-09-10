@@ -1,0 +1,35 @@
+name: Verify public image pull
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-public-pull.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-pull:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure no GHCR login is present
+        run: docker logout ghcr.io || true
+
+      - name: Pull image anonymously
+        run: docker pull ghcr.io/pdherdy/truenas-actions-runner:latest
+
+      - name: Verify toolchain inside published image
+        run: |
+          docker run --rm --entrypoint bash ghcr.io/pdherdy/truenas-actions-runner:latest -lc '
+            set -euo pipefail
+            python --version
+            python3 --version
+            pip --version
+            node --version
+            npm --version
+            pwsh --version
+            git --version
+            docker --version
+          '
