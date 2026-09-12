@@ -1,4 +1,4 @@
-# GitHub Actions Runner Image
+# GitHub Runner Image
 
 A lightweight Linux self-hosted GitHub Actions runner image based on [`myoung34/github-runner`](https://github.com/myoung34/docker-github-actions-runner), currently using its `ubuntu-noble` base.
 
@@ -18,7 +18,7 @@ The Chromium browser binary is intentionally **not** baked into the image. Workf
 ## Image
 
 ```text
-ghcr.io/pdherdy/github-actions-runner-image:latest
+ghcr.io/pdherdy/github-runner-image:latest
 ```
 
 A second immutable tag is published for every build using the Git commit SHA.
@@ -32,7 +32,7 @@ Example:
 ```yaml
 services:
   runner:
-    image: ghcr.io/pdherdy/github-actions-runner-image:latest
+    image: ghcr.io/pdherdy/github-runner-image:latest
 ```
 
 Keep runner identity and work data on separate persistent mounts. For example:
@@ -56,12 +56,13 @@ A TrueNAS SCALE deployment can use host paths instead of local Docker volumes:
 ```yaml
 services:
   runner:
-    image: ghcr.io/pdherdy/github-actions-runner-image:latest
+    image: ghcr.io/pdherdy/github-runner-image:latest
     volumes:
       - /mnt/app_pool/github_runners/example/runner-data:/runner/data
       - /mnt/app_pool/github_runners/example/work:/_work
-      - /var/run/docker.sock:/var/run/docker.sock
 ```
+
+Docker access is intentionally not included in the default example. Add it only to a dedicated runner when a workflow explicitly needs to control the host Docker daemon.
 
 ## Publishing
 
