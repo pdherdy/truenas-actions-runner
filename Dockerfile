@@ -4,8 +4,8 @@ USER root
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-LABEL org.opencontainers.image.source="https://github.com/pdherdy/linux-actions-runner" \
-      org.opencontainers.image.description="TrueNAS self-hosted GitHub Actions runner with Python, Node.js, npm and browser-test dependencies" \
+LABEL org.opencontainers.image.source="https://github.com/pdherdy/github-actions-runner-image" \
+      org.opencontainers.image.description="Linux self-hosted GitHub Actions runner image with Python, Node.js, npm and browser-test dependencies" \
       org.opencontainers.image.licenses="MIT"
 
 # The upstream runner already includes most CI tooling. Add/fix the pieces
