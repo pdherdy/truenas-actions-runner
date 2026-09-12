@@ -27,7 +27,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
 
       - name: Build and publish
         uses: docker/build-push-action@v6
@@ -36,8 +36,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/pdherdy/truenas-actions-runner:latest
-            ghcr.io/pdherdy/truenas-actions-runner:${{ github.sha }}
+            ghcr.io/pdherdy/github-actions-runner-image:latest
+            ghcr.io/pdherdy/github-actions-runner-image:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: true
